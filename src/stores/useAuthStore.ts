@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 import type { User } from '@/types'
 
 export const useAuthStore = defineStore('auth', () => {
-    const user = ref<User | null>(null)
+    const user = ref<User | null>(JSON.parse(localStorage.getItem('auth_user') || 'null'))
     const token = ref<string | null>(localStorage.getItem('auth_token'))
 
     // ─── Getters ───────────────────────────────────────────────────────────────
@@ -18,16 +18,19 @@ export const useAuthStore = defineStore('auth', () => {
         user.value = userData
         token.value = authToken
         localStorage.setItem('auth_token', authToken)
+        localStorage.setItem('auth_user', JSON.stringify(userData))
     }
 
     function setUser(userData: User) {
         user.value = userData
+        localStorage.setItem('auth_user', JSON.stringify(userData))
     }
 
     function logout() {
         user.value = null
         token.value = null
         localStorage.removeItem('auth_token')
+        localStorage.removeItem('auth_user')
     }
 
     return { user, token, isLoggedIn, fullName, setAuth, setUser, logout }

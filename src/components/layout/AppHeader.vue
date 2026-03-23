@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
 import { Search, ShoppingCartFull, User, Menu, Close } from '@element-plus/icons-vue'
 import { useCartStore } from '@/stores/useCartStore'
 import { useAuthStore } from '@/stores/useAuthStore'
@@ -8,6 +9,7 @@ import { useAuthStore } from '@/stores/useAuthStore'
 const router = useRouter()
 const cartStore = useCartStore()
 const authStore = useAuthStore()
+const { isLoggedIn, user } = storeToRefs(authStore)
 
 const searchQuery = ref('')
 const mobileMenuOpen = ref(false)
@@ -15,7 +17,7 @@ const mobileMenuOpen = ref(false)
 const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'Products', to: '/products' },
-  { label: 'Deals', to: '/products?sort=discountPercentage' },
+  { label: 'Deals', to: '/deals' },
 ]
 
 function handleSearch() {
@@ -81,11 +83,11 @@ function handleLogout() {
           </RouterLink>
 
           <!-- Auth -->
-          <template v-if="authStore.isLoggedIn">
+          <template v-if="isLoggedIn">
             <el-dropdown trigger="click" placement="bottom-end">
               <div class="action-btn">
-                <el-avatar :size="36" :src="authStore.user?.image" class="user-avatar" />
-                <span class="action-label">{{ authStore.user?.firstName }}</span>
+                <el-avatar :size="36" :src="user?.image" class="user-avatar" />
+                <span class="action-label">{{ user?.firstName }}</span>
               </div>
               <template #dropdown>
                 <el-dropdown-menu>
