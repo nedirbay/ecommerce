@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..800;1,14..32,300..800&display=swap');
+
+@import "tailwindcss";
+@import "./assets/styles/variables.css";
+
+/* ─── Reset & base ─────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+/* ─── Layout helpers ────────────────────────────────────────────────────────── */
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+.page-wrapper {
+    min-height: calc(100vh - var(--header-height));
+}
+
+/* ─── Element Plus customizations ──────────────────────────────────────────── */
+.el-button--primary {
+    --el-button-bg-color: var(--primary) !important;
+    --el-button-border-color: var(--primary) !important;
+    --el-button-hover-bg-color: var(--primary-hover) !important;
+    --el-button-hover-border-color: var(--primary-hover) !important;
+    --el-button-active-bg-color: var(--primary-hover) !important;
+}
+
+.el-input__wrapper {
+    border-radius: var(--radius-sm) !important;
+}
+
+.el-card {
+    border-radius: var(--radius-md) !important;
+    border: 1px solid var(--border) !important;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-muted);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+    border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
