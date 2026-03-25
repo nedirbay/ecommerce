@@ -20,11 +20,29 @@ export function useProductsViewModel() {
         sort: (route.query.sort as SortOption) ?? 'rating',
         page: Number(route.query.page ?? 1),
         pageSize: 12,
+        minPrice: 0,
+        maxPrice: 2000,
+        rating: 0,
+        onlyInStock: false,
     })
 
-    const sortedProducts = computed(() =>
-        ProductsService.sortProducts(products.value, filters.value.sort),
-    )
+    const filteredAndSortedProducts = computed(() => {
+        let result = [...products.value]
+
+        // Frontend Filtering
+        if (filters.value.minPrice > 0 || filters.value.maxPrice < 2000) {
+            result = result.filter(p => p.price >= filters.value.minPrice && p.price <= filters.value.maxPrice)
+        }
+        if (filters.value.rating > 0) {
+            result = result.filter(p => p.rating >= filters.value.rating)
+        }
+        if (filters.value.onlyInStock) {
+            result = result.filter(p => (p.stock ?? 0) > 0)
+        }
+
+        // Sorting
+        return ProductsService.sortProducts(result, filters.value.sort)
+    })
 
     const totalPages = computed(() => Math.ceil(total.value / filters.value.pageSize))
 
@@ -61,7 +79,23 @@ export function useProductsViewModel() {
                 ...(filters.value.search ? { q: filters.value.search } : {}),
                 ...(filters.value.category ? { category: filters.value.category } : {}),
                 ...(filters.value.sort !== 'rating' ? { sort: filters.value.sort } : {}),
+                ...(filters.value.minPrice > 0 ? { minPrice: filters.value.minPrice } : {}),
+                ...(filters.value.maxPrice < 2000 ? { maxPrice: filters.value.maxPrice } : {}),
+                ...(filters.value.rating > 0 ? { rating: filters.value.rating } : {}),
+                ...(filters.value.onlyInStock ? { onlyInStock: 'true' } : {}),
             },
+        })
+    }
+
+    function resetFilters() {
+        applyFilters({
+            search: '',
+            category: '',
+            sort: 'rating',
+            minPrice: 0,
+            maxPrice: 2000,
+            rating: 0,
+            onlyInStock: false
         })
     }
 
@@ -79,7 +113,7 @@ export function useProductsViewModel() {
     })
 
     return {
-        products: sortedProducts,
+        products: filteredAndSortedProducts,
         categories,
         total,
         loading,
@@ -87,6 +121,7 @@ export function useProductsViewModel() {
         filters,
         totalPages,
         applyFilters,
+        resetFilters,
         changePage,
     }
 }

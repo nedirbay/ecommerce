@@ -17,6 +17,7 @@ export function useHomeViewModel() {
             cta: 'Order a Cake',
             to: '/products',
             gradient: 'linear-gradient(135deg, #be185d 0%, #db2777 100%)',
+            image: 'https://images.unsplash.com/photo-1616541823729-00fe0aacd322?q=80&w=2070&auto=format&fit=crop',
             emoji: '🎂',
         },
         {
@@ -25,6 +26,7 @@ export function useHomeViewModel() {
             cta: 'Browse Gallery',
             to: '/products',
             gradient: 'linear-gradient(135deg, #92400e 0%, #d97706 100%)',
+            image: 'https://images.unsplash.com/photo-1550617931-e17a7b70dce2?q=80&w=2070&auto=format&fit=crop',
             emoji: '🥐',
         },
         {
@@ -33,6 +35,7 @@ export function useHomeViewModel() {
             cta: 'Consultation',
             to: '/products',
             gradient: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)',
+            image: 'https://images.unsplash.com/photo-1535254973040-607b474cb8c2?q=80&w=2070&auto=format&fit=crop',
             emoji: '💍',
         },
     ]

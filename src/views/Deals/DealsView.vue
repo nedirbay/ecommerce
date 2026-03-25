@@ -129,6 +129,7 @@ function handleAddComboToCart(combo: any) {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
+  margin-top: 2rem;
 }
 
 .special-banner {
@@ -200,12 +201,14 @@ function handleAddComboToCart(combo: any) {
   font-size: var(--font-size-3xl);
   font-weight: 800;
   color: var(--text-primary);
-  margin-bottom: 8px;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
 .section-desc {
   color: var(--text-secondary);
   font-size: var(--font-size-lg);
+  margin: 2rem;
 }
 
 /* ── Combos Grid ── */
@@ -213,6 +216,7 @@ function handleAddComboToCart(combo: any) {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 32px;
+  margin: 2rem 0;
 }
 
 .combo-card {

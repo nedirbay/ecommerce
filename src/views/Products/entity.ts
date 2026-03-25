@@ -8,6 +8,10 @@ export interface ProductFilters {
     sort: SortOption
     page: number
     pageSize: number
+    minPrice: number
+    maxPrice: number
+    rating: number
+    onlyInStock: boolean
 }
 
 export interface ProductListState extends ApiPagination {

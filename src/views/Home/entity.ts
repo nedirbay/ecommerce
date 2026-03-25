@@ -13,6 +13,7 @@ export interface HeroSlide {
     cta: string
     to: string
     gradient: string
+    image: string
     emoji: string
 }
 
